@@ -35,29 +35,29 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-  fill(0);
-  textSize(24);
-  textAlign(CENTER, CENTER);
-  text("Drag your finger or mouse to change the background color!", width/2, height/2);
-}
+  background(rotationX,rotationX,rotationZ);
+  fill(255)
 
-function mouseDragged() {
-  // Map the mouse position to a range of colors
-  let r = map(mouseX, 0, width, 0, 255);
-  let g = map(mouseY, 0, height, 0, 255);
-  let b = map(abs(mouseX - mouseY), 0, width + height, 0, 255);
+  // we can use rotationZ, rotationX and rotationY
+  // they should be used in this order (apparently - see docs)
+  // even though default mode is radians the Z rotation returns degrees unless converted
 
-  // Set the background color based on the mapped values
-  background(r, g, b);
-}
+  // the below code ensures a smooth transition from 0-180 and back
+  let zMotion = round(width / 5 * abs(radians(rotationZ) - PI))
+  // x and y values moved from the centre point
+  let yMotion = round(height / 2 + rotationX * 10)
+  let xMotion = round(width / 2 + rotationY * 10)
 
-function touchMoved() {
-  // Map the touch position to a range of colors
-  let r = map(touchX, 0, width, 0, 255);
-  let g = map(touchY, 0, height, 0, 255);
-  let b = map(abs(touchX - touchY), 0, width + height, 0, 255);
+  // motion affected circle
+  circle(xMotion, yMotion, zMotion)
+  // reference circle
+  stroke(255)
+  strokeWeight(3)
+  noFill()
+  circle(width / 2, height / 2, width / 1.2)
+  noStroke();
 
-  // Set the background color based on the mapped values
-  background(r, g, b);
+  // text to provide instructions and
+  // document values at the top of the screen
+
 }
