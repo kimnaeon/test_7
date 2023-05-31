@@ -35,7 +35,7 @@ function setup() {
 }
 
 function draw() {
-  background(rotationX,rotationY,rotationZ);
+  background(xMotion, yMotion, zMotion);
   fill(255)
 
   // we can use rotationZ, rotationX and rotationY
