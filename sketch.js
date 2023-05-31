@@ -35,23 +35,29 @@ function setup() {
 }
 
 function draw() {
-   background(220);
+  background(220);
   fill(0);
   textSize(24);
   textAlign(CENTER, CENTER);
-  text("Tilt your smartphone to change the background color!", width/2, height/2);
+  text("Drag your finger or mouse to change the background color!", width/2, height/2);
+}
 
-  // Get the acceleration values in the X and Y axes
-  let xAcceleration = accelerationX;
-  let yAcceleration = accelerationY;
-
-  // Map the acceleration values to a range of colors
-  let r = map(xAcceleration, -90, 90, 0, 255);
-  let g = map(yAcceleration, -90, 90, 0, 255);
-  let b = map(abs(xAcceleration - yAcceleration), 0, 180, 0, 255);
+function mouseDragged() {
+  // Map the mouse position to a range of colors
+  let r = map(mouseX, 0, width, 0, 255);
+  let g = map(mouseY, 0, height, 0, 255);
+  let b = map(abs(mouseX - mouseY), 0, width + height, 0, 255);
 
   // Set the background color based on the mapped values
   background(r, g, b);
+}
 
-  
+function touchMoved() {
+  // Map the touch position to a range of colors
+  let r = map(touchX, 0, width, 0, 255);
+  let g = map(touchY, 0, height, 0, 255);
+  let b = map(abs(touchX - touchY), 0, width + height, 0, 255);
+
+  // Set the background color based on the mapped values
+  background(r, g, b);
 }
